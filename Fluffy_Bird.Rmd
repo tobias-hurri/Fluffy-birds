@@ -5,31 +5,24 @@ output: html_notebook
 
 ```{r}
 library(tidyverse)
-```
-
-```{r}
-# Create a sample dataset with bird fluffiness categories and their counts
-bird_fluff_data <- data.frame(
-  fluffiness = c("Naked", "Light Fluff", "Medium Fluff", "Fluffy", "Cloud Fluffy", "Only FLUFF!!"),
-  count = c(5, 12, 20, 15, 8, 3)
-)
-
-# View the dataset
-print(bird_fluff_data)
-
+library(readxl)
 ```
 
 
 ```{r}
-library(ggplot2)
+# Read the Excel file
+Fluffy_data <- read_excel("F_data.xlsx")
+```
 
-# Plotting bird fluffiness categories
-p <- ggplot(bird_fluff_data, aes(x = fluffiness, y = count)) +
-  geom_bar(stat = "identity", aes(fill = fluffiness), color = "black") +
+
+
+```{r}
+ggplot(Fluffy_data, aes(x = Fluffiness, y = Temp_Area)) +
+  geom_bar(stat = "identity", aes(fill = Fluffiness), color = "black") +
   labs(
-    title = "Bird Fluffiness Categories",
+    title = "Bird Fluffiness compared to temp",
     x = "Fluffiness Level",
-    y = "Number of Birds"
+    y = "Temperature in captured area"
   ) +
   theme_minimal() +
   theme(
@@ -40,11 +33,8 @@ p <- ggplot(bird_fluff_data, aes(x = fluffiness, y = count)) +
     plot.title = element_text(size = 16, face = "bold"),
     legend.position = "none"
   )
-
-# Display the plot
-print(p)
-
 ```
+
 
 
 
