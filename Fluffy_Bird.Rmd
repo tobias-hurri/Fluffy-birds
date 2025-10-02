@@ -7,3 +7,44 @@ output: html_notebook
 library(tidyverse)
 ```
 
+```{r}
+# Create a sample dataset with bird fluffiness categories and their counts
+bird_fluff_data <- data.frame(
+  fluffiness = c("Naked", "Light Fluff", "Medium Fluff", "Fluffy", "Cloud Fluffy", "Only FLUFF!!"),
+  count = c(5, 12, 20, 15, 8, 3)
+)
+
+# View the dataset
+print(bird_fluff_data)
+
+```
+
+
+```{r}
+library(ggplot2)
+
+# Plotting bird fluffiness categories
+p <- ggplot(bird_fluff_data, aes(x = fluffiness, y = count)) +
+  geom_bar(stat = "identity", aes(fill = fluffiness), color = "black") +
+  labs(
+    title = "Bird Fluffiness Categories",
+    x = "Fluffiness Level",
+    y = "Number of Birds"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(size = 12, face = "bold"),
+    axis.text.y = element_text(size = 12, face = "bold"),
+    axis.title.x = element_text(size = 14, face = "bold"),
+    axis.title.y = element_text(size = 14, face = "bold"),
+    plot.title = element_text(size = 16, face = "bold"),
+    legend.position = "none"
+  )
+
+# Display the plot
+print(p)
+
+```
+
+
+
