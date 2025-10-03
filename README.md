@@ -20,7 +20,7 @@ install.packages("tidyverse")
 install.packages("readxl")
 install.packages("dplyr")
 ``` 
-
+ 
 
 The R version used when creating the graph was R 4.5.1. The packages
 used in the coding where tidyverse, readxl and dplyr. 
