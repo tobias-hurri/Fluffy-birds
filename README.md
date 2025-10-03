@@ -20,7 +20,17 @@ install.packages("tidyverse")
 install.packages("readxl")
 install.packages("dplyr")
 ``` 
- 
+
+If it says it does not find a "path" to 
+
+```r
+Fluffy_data <- read_excel("Data/F_data.xlsx") 
+``` 
+it may be beacuse of a Global option setting in your R studio program.
+In that chase: go to "Tools" -> "Global Options" -> "R Markdown" 
+-> find "Evaluate Chunks in Dictonary" -> and chose option "Project".
+Apply/Ok this, and this may fix the path. 
+
 
 The R version used when creating the graph was R 4.5.1. The packages
 used in the coding where tidyverse, readxl and dplyr. 

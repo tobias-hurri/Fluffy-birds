@@ -1,0 +1,83 @@
+---
+title: "Fluffy_Bird"
+output: html_notebook
+---
+
+
+
+
+#Library
+
+Opening the libraries used in the coding. If the libraries does not work try the "install_packages" function. 
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(dplyr)
+```
+
+#Read data
+
+The data is from an excel file and is read into R and named "Fluffy_data".
+
+```{r}
+# Read the Excel file
+Fluffy_data <- read_excel("Data/F_data.xlsx")
+```
+
+
+
+#Final Graph
+#Save as a png-image
+
+The final version of the graphs. Satisfied with the visualization of the data. Using ggsave function to the the graph into a png-picture that can be used in a article (result part). 
+
+```{r}
+
+# Convert Fluffiness to a factor with the desired order
+Fluffy_data$Fluffiness <- factor(Fluffy_data$Fluffiness, 
+ levels = c("Naked", "Light Fluff", "Medium Fluff", "Fluffy"))
+
+# Calculate mean temperatures for each Fluffiness level
+mean_values <- Fluffy_data %>%
+  group_by(Fluffiness) %>%
+  summarize(mean_temp = mean(Temp_Area))
+
+
+#save it a "Fluff_graph" so the graph-plot can be created into a png-picture
+Fluff_graph <- ggplot(Fluffy_data, aes(x = Fluffiness, y = Temp_Area)) +
+  geom_jitter(aes(color = Fluffiness), width = 0.2, height = 0, alpha = 0.6) + 
+  # Add horizontal lines showing the mean temperature for each Fluffiness level
+  geom_hline(data = mean_values, aes(yintercept = mean_temp), linetype = "dashed", color = "red") +
+  facet_grid(. ~ Fluffiness, scales = "free_x") +  
+   scale_y_continuous(breaks = seq(from = min(Fluffy_data$Temp_Area), 
+                                  to = max(Fluffy_data$Temp_Area), by = 3)) +  # Customize breaks 
+  labs(
+    title = "Birds Fluffiness compared to Temperature in captured area",
+    y = "Temperature in (C)",
+    x = "Fluffiness Level"
+  ) +
+  theme_bw() +
+  theme(
+    axis.text.x = element_blank(),
+    axis.text.y = element_text(size = 12, face = "bold"),
+    axis.title.x = element_text(size = 14, face = "bold"),
+    axis.title.y = element_text(size = 14, face = "bold"),
+    plot.title = element_text(size = 13, face = "bold"),
+    strip.text = element_text(size = 12),
+    legend.position = "none"
+  )
+
+#saving the graph as a png-picture
+ggsave("Output/fluffiness_temperature_plot.png", plot = Fluff_graph, width = 8, height = 6, dpi = 300)
+```
+
+
+
+
+
+
+
+
+
+
