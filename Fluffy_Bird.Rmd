@@ -3,12 +3,22 @@ title: "Fluffy_Bird"
 output: html_notebook
 ---
 
+
+
+
+#Library
+
+Opening the libraries used in the coding. If the libraries does not work try the "install_packages" function. 
+
 ```{r}
 library(tidyverse)
 library(readxl)
 library(dplyr)
 ```
 
+#Read data
+
+The data is from an excel file and is read into R and named "Fluffu_data".
 
 ```{r}
 # Read the Excel file
@@ -16,6 +26,14 @@ Fluffy_data <- read_excel("F_data.xlsx")
 ```
 
 
+
+
+
+
+
+#Creating and looking at graphs (evolving)
+
+First graph is just looking at the data. The only important graph is the Final Graph at the end of the coding (can be found at 136-170, or at the Outline overview "Final Graph"). The text and the values do not look nice, so i try to improve it to the next code/graph.
 
 ```{r}
 ggplot(Fluffy_data, aes(x = Fluffiness, y = Temp_Area)) +
@@ -36,6 +54,8 @@ ggplot(Fluffy_data, aes(x = Fluffiness, y = Temp_Area)) +
   )
 ```
 
+
+The text is still colliding and the coloring is very dark and not visualizing appealing. 
 
 ```{r}
 
@@ -59,7 +79,7 @@ ggplot(Fluffy_data, aes(x = Fluffiness, y = Temp_Area)) +
 
 ```
 
-
+Text and size not appealing. 
 
 ```{r}
 
@@ -82,6 +102,10 @@ ggplot(Fluffy_data, aes(x = Fluffiness, y = Temp_Area)) +
   )
 
 ```
+
+
+
+Still some text colliding and i want the mean to show. 
 
 ```{r}
 
@@ -110,6 +134,16 @@ ggplot(Fluffy_data, aes(x = Fluffiness, y = Temp_Area)) +
 
 ```
 
+
+
+
+
+
+#Final Graph
+#Save as a png-image
+
+The final version of the graphs. Satisfied with the visualization of the data. Using ggsave function to the the graph into a png-picture that can be used in a article (result part). 
+
 ```{r}
 
 # Convert Fluffiness to a factor with the desired order
@@ -121,7 +155,9 @@ mean_values <- Fluffy_data %>%
   group_by(Fluffiness) %>%
   summarize(mean_temp = mean(Temp_Area))
 
-ggplot(Fluffy_data, aes(x = Fluffiness, y = Temp_Area)) +
+
+#save it a "Fluff_graph" so the graph-plot can be created into a png-picture
+Fluff_graph <- ggplot(Fluffy_data, aes(x = Fluffiness, y = Temp_Area)) +
   geom_jitter(aes(color = Fluffiness), width = 0.2, height = 0, alpha = 0.6) + 
   # Add horizontal lines showing the mean temperature for each Fluffiness level
   geom_hline(data = mean_values, aes(yintercept = mean_temp), linetype = "dashed", color = "red") +
@@ -144,7 +180,15 @@ ggplot(Fluffy_data, aes(x = Fluffiness, y = Temp_Area)) +
     legend.position = "none"
   )
 
+#saving the graph as a png-picture
+ggsave("fluffiness_temperature_plot.png", plot = Fluff_graph, width = 8, height = 6, dpi = 300)
 ```
+
+
+
+
+
+
 
 
 
