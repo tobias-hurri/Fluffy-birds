@@ -6,6 +6,7 @@ output: html_notebook
 ```{r}
 library(tidyverse)
 library(readxl)
+library(dplyr)
 ```
 
 
@@ -103,9 +104,48 @@ ggplot(Fluffy_data, aes(x = Fluffiness, y = Temp_Area)) +
     axis.title.x = element_text(size = 14, face = "bold"),
     axis.title.y = element_text(size = 14, face = "bold"),
     plot.title = element_text(size = 16, face = "bold"),
-    strip.text = element_text(size = 12)
+    strip.text = element_text(size = 12),
+    legend.position = "none" 
   )
 
 ```
+
+```{r}
+
+# Convert Fluffiness to a factor with the desired order
+Fluffy_data$Fluffiness <- factor(Fluffy_data$Fluffiness, 
+ levels = c("Naked", "Light Fluff", "Medium Fluff", "Fluffy"))
+
+# Calculate mean temperatures for each Fluffiness level
+mean_values <- Fluffy_data %>%
+  group_by(Fluffiness) %>%
+  summarize(mean_temp = mean(Temp_Area))
+
+ggplot(Fluffy_data, aes(x = Fluffiness, y = Temp_Area)) +
+  geom_jitter(aes(color = Fluffiness), width = 0.2, height = 0, alpha = 0.6) + 
+  # Add horizontal lines showing the mean temperature for each Fluffiness level
+  geom_hline(data = mean_values, aes(yintercept = mean_temp), linetype = "dashed", color = "red") +
+  facet_grid(. ~ Fluffiness, scales = "free_x") +  
+   scale_y_continuous(breaks = seq(from = min(Fluffy_data$Temp_Area), 
+                                  to = max(Fluffy_data$Temp_Area), by = 3)) +  # Customize breaks 
+  labs(
+    title = "Birds Fluffiness compared to Temperature in captured area",
+    y = "Temperature in (C)",
+    x = "Fluffiness Level"
+  ) +
+  theme_bw() +
+  theme(
+    axis.text.x = element_blank(),
+    axis.text.y = element_text(size = 12, face = "bold"),
+    axis.title.x = element_text(size = 14, face = "bold"),
+    axis.title.y = element_text(size = 14, face = "bold"),
+    plot.title = element_text(size = 13, face = "bold"),
+    strip.text = element_text(size = 12),
+    legend.position = "none"
+  )
+
+```
+
+
 
 
