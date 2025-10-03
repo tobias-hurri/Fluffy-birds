@@ -36,5 +36,76 @@ ggplot(Fluffy_data, aes(x = Fluffiness, y = Temp_Area)) +
 ```
 
 
+```{r}
+
+ggplot(Fluffy_data, aes(x = Fluffiness, y = Temp_Area)) +
+  geom_point(alpha = 0.5) +  # Use transparency for better visual overlap handling
+  facet_grid(. ~ Fluffiness, scales = "free_x") +  # Facet by Fluffiness to compare per category
+  labs(
+    title = "Bird Fluffiness Compared to Area Temperature",
+    y = "Temperature in Captured Area",
+    x = "Fluffiness Level"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(size = 12, face = "bold"),
+    axis.text.y = element_text(size = 12, face = "bold"),
+    axis.title.x = element_text(size = 14, face = "bold"),
+    axis.title.y = element_text(size = 14, face = "bold"),
+    plot.title = element_text(size = 16, face = "bold"),
+    strip.text = element_text(size = 12)
+  )
+
+```
+
+
+
+```{r}
+
+ggplot(Fluffy_data, aes(x = Fluffiness, y = Temp_Area)) +
+  geom_jitter(aes(color = Fluffiness), width = 0.2, height = 0, alpha = 0.5) +  # Jitter the points horizontally
+  facet_grid(. ~ Fluffiness, scales = "free_x") +  # Facet by Fluffiness to compare per category
+  labs(
+    title = "Bird Fluffiness Compared to Area Temperature",
+    y = "Temperature in Captured Area",
+    x = "Fluffiness Level"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(size = 12, face = "bold"),
+    axis.text.y = element_text(size = 12, face = "bold"),
+    axis.title.x = element_text(size = 14, face = "bold"),
+    axis.title.y = element_text(size = 14, face = "bold"),
+    plot.title = element_text(size = 16, face = "bold"),
+    strip.text = element_text(size = 12)
+  )
+
+```
+
+```{r}
+
+# Correctly convert Fluffiness to a factor with the desired order
+Fluffy_data$Fluffiness <- factor(Fluffy_data$Fluffiness, 
+                                  levels = c("Naked", "Light Fluff", "Medium Fluff", "Fluffy", "Cloud Fluffy", "Only Fluff"))
+
+ggplot(Fluffy_data, aes(x = Fluffiness, y = Temp_Area)) +
+  geom_jitter(aes(color = Fluffiness), width = 0.2, height = 0, alpha = 0.5) +
+  facet_grid(. ~ Fluffiness, scales = "free_x") +
+  labs(
+    title = "Bird Fluffiness Compared to Area Temperature",
+    y = "Temperature in Captured Area",
+    x = "Fluffiness Level"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(size = 12, face = "bold"),
+    axis.text.y = element_text(size = 12, face = "bold"),
+    axis.title.x = element_text(size = 14, face = "bold"),
+    axis.title.y = element_text(size = 14, face = "bold"),
+    plot.title = element_text(size = 16, face = "bold"),
+    strip.text = element_text(size = 12)
+  )
+
+```
 
 
