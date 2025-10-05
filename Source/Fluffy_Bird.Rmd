@@ -6,7 +6,7 @@ output: html_notebook
 Goal: to make a graph that visualizes the the data of captured birds compared with their fluffines levels and the temperature of area the birds where captured. 
 
 
-#Library
+#Library:
 
 Opening the libraries used in the coding. If the libraries does not work try the "install_packages" function. 
 
@@ -16,7 +16,7 @@ library(readxl)
 library(dplyr)
 ```
 
-#Read data
+#Read data:
 
 The data is from an excel file and is read into R and named "Fluffy_data".
 
@@ -27,8 +27,8 @@ Fluffy_data <- read_excel("Data/F_data.xlsx")
 
 
 
-#Final Graph
-#Save as a png-image
+#Final Graph:
+#Save as a png-image:
 
 The final version of the graphs. Satisfied with the visualization of the data. Using ggsave function to the the graph into a png-picture that can be used in a article (result part). 
 
