@@ -28,7 +28,7 @@ Fluffy_data <- read_excel("Data/F_data.xlsx")
 
 
 #Final Graph:
-#Save as a png-image: 
+#Save as a png-image:
 
 The final version of the graphs. Satisfied with the visualization of the data. Using ggsave function to the the graph into a png-picture that can be used in a article (result part). 
 
