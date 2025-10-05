@@ -3,7 +3,7 @@ title: "Fluffy_Bird"
 output: html_notebook
 ---
 
-
+Goal: to make a graph that visualizes the the data of captured birds compared with their fluffines levels and the temperature of area the birds where captured. 
 
 
 #Library
@@ -44,7 +44,8 @@ mean_values <- Fluffy_data %>%
   summarize(mean_temp = mean(Temp_Area))
 
 
-#save it a "Fluff_graph" so the graph-plot can be created into a png-picture
+#save it a "Fluff_graph" so the graph-plot can be created into a png-picture.
+#using jitter and hline to prevent datpoints overlapping and create a visualizing mean line
 Fluff_graph <- ggplot(Fluffy_data, aes(x = Fluffiness, y = Temp_Area)) +
   geom_jitter(aes(color = Fluffiness), width = 0.2, height = 0, alpha = 0.6) + 
   # Add horizontal lines showing the mean temperature for each Fluffiness level
